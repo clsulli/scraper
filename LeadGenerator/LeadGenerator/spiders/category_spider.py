@@ -10,7 +10,8 @@ class CategorySpider(scrapy.Spider):
         yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-         cats = response.css("div.entry-content > table > tbody > tr > td > span::text").extract()
-         with open("categories/categories.txt", "w") as f:
-             for cat in cats:
-                 f.write(cat + '\n')
+        cats = response.css("div.entry-content > table > tbody > tr > td > span::text").extract()
+        with open("categories/categories.txt", "w") as f:
+            for cat in cats:
+                f.write(cat + '\n')
+
