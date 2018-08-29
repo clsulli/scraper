@@ -8,7 +8,9 @@
 import scrapy
 
 
-class LeadgeneratorItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Listing(scrapy.Item):
+    name = scrapy.Field()
+    detail_page = scrapy.Field()
+    phone = scrapy.Field()
+    website = scrapy.Field()
+    location = scrapy.Field()
