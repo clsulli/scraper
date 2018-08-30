@@ -13,4 +13,6 @@ class Listing(scrapy.Item):
     detail_page = scrapy.Field()
     phone = scrapy.Field()
     website = scrapy.Field()
+    search_location = scrapy.Field()
     location = scrapy.Field()
+    category = scrapy.Field()
