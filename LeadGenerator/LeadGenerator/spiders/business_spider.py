@@ -60,16 +60,25 @@ def create_start_file():
 
 
 def create_start_urls_from_file():
-    with open('C:\\Users\\Clint\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\categories\\categories3.txt', 'r') as f:
+    with open("C:\\Users\\clsul\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\categories\\categories3.txt", 'r') as f:
         categories = f.readlines()
         category_list = []
         for category in categories:
             category_list.append(category.strip('\n'))
         f.close()
 
+    with open('C:\\Users\\clsul\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\locations\\locations.txt', 'r') as f:
+        locations = f.readlines()
+        location_list = []
+        for location in locations:
+            location_list.append(location.strip('\n'))
+        f.close()
+
     start_urls = []
-    for category in category_list:
-        start_urls.append("https://www.yellowpages.com/search?search_terms={}&geo_location_terms=decatur%2C%20il&page={}".format(category, 1))
+    for location in location_list:
+        location = location.replace(' ', '%20').replace(',', '%2C')
+        for category in category_list:
+            start_urls.append("https://www.yellowpages.com/search?search_terms={}&geo_location_terms={}&page={}".format(category, location, 1))
 
     return start_urls
 
