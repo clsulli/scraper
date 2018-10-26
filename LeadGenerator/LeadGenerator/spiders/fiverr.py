@@ -1,12 +1,11 @@
 import scrapy
 from LeadGenerator.items import Listing
 
-
-class BusinessSpider(scrapy.Spider):
-    name = "business"
+class Fiverr(scrapy.Spider):
+    name = "fiverr"
 
     def start_requests(self):
-        start_urls = create_start_urls_from_file()
+        start_urls = create_start_requests()
         for url in start_urls:
             request = scrapy.Request(url=url, callback=self.parse)
             request.meta['proxy'] = 'http://209.126.120.13:8080'
@@ -51,60 +50,11 @@ class BusinessSpider(scrapy.Spider):
         yield item
 
 
-def create_start_file():
-    with open('C:\\Users\\Clint\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\categories\\categories3.txt', 'r') as f:
-        categories = f.readlines()
-        category_list = []
-        for category in categories:
-            category_list.append(category.strip('\n'))
-        f.close()
-
-    with open('decatur_searches.txt', 'w+') as f:
-        for category in category_list:
-            f.write('{} in decatur, il\n'.format(category))
-        f.close()
-
-
-def create_start_urls_from_file():
-    with open("C:\\Users\\clsul\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\categories\\categories4.txt", 'r') as f:
-        categories = f.readlines()
-        category_list = []
-        for category in categories:
-            category_list.append(category.strip('\n'))
-        f.close()
-
-    with open('C:\\Users\\clsul\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\locations\\locations-continued.txt', 'r') as f:
-        locations = f.readlines()
-        location_list = []
-        for location in locations:
-            location_list.append(location.strip('\n'))
-        f.close()
+def create_start_requests():
+    category = input('CAT >> ')
+    state = input('STATE >> ')
 
     start_urls = []
-    for location in location_list:
-        location = location.replace(' ', '%20').replace(',', '%2C')
-        for category in category_list:
-            start_urls.append("https://www.yellowpages.com/search?search_terms={}&geo_location_terms={}&page={}".format(category, location, 1))
-
+    for i in range(1, 20):
+        start_urls.append('https://www.yellowpages.com/search?search_terms={}&geo_location_terms={}&page={}'.format(category, state, i))
     return start_urls
-
-
-def lowercase():
-    with open("C:\\Users\\Clint\\PycharmProjects\\scraper\\LeadGenerator\\LeadGenerator\\locations\\locations.txt", "r") as f:
-        locations = []
-        for location in f.readlines():
-            locations.append(location.lower())
-        f.close()
-
-    with open("locations.txt", "w+") as f:
-        for location in locations:
-            f.write(location)
-        f.close()
-
-
-if __name__ == '__main__':
-    lowercase()
-
-
-
-

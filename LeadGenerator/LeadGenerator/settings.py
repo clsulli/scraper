@@ -65,7 +65,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'LeadGenerator.pipelines.LeadgeneratorPipeline': 100,
+   # 'LeadGenerator.pipelines.LeadgeneratorPipeline': 100,
+   'LeadGenerator.pipelines.Fiverr' : 100
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
